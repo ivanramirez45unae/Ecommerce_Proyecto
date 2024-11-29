@@ -1,0 +1,29 @@
+<div class="container-fluid mt-4">
+  <h1>Mis Favoritos</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% if @favorite_products.any? %>
+      <% @favorite_products.each do |product| %>
+        <div class="col-md-3">
+          <div class="card h-100 text-center">
+            <div class="card-body">
+              <%= link_to product_path(product) do %>
+                <%= image_tag "products/#{product.image_url}", class: "card-img-top" if product.image_url.present? %>
+                <h5 class="card-title"><%= product.name %></h5>
+              <% end %>
+              <p class="card-text"><%= number_with_delimiter(product.price.to_i, delimiter: ".", separator: "") %> Gs.</p>
+
+              <!-- Botón para eliminar de favoritos -->
+            <%= button_to "Eliminar de Favoritos", unfavorite_product_path(product, redirect_to_favorites: true), 
+                        method: :delete, 
+                        data: { confirm: "¿Estás seguro de que deseas eliminar este producto de tus favoritos?" },
+                        class: "btn btn-danger btn-sm mt-2" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No tienes productos en tus favoritos.</p>
+    <% end %>
+  </div>
+</div>
+

@@ -1,0 +1,285 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  background-color: #f1e7db;
+  color: #333;
+}
+
+h2,
+h3 {
+  color: #333;
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+/* ===================== */
+/* Estilos para la Barra de Navegación (Navbar) */
+/* ===================== */
+.navbar {
+  background-color: #273b30; /* Tono verde para la barra */
+}
+
+.navbar-brand {
+  color: #ffffff !important; /* Color blanco para el texto del logo */
+}
+
+.navbar-nav .nav-link {
+  color: #ffffff !important; /* Color blanco para los enlaces */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #adb5bd !important; /* Color gris claro para el hover */
+}
+
+.navbar-toggler-icon {
+  background-image: none !important; /* Elimina la imagen predeterminada en el toggler */
+}
+
+.navbar-toggler {
+  border-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Border con opacidad para el toggler */
+}
+
+.form-control {
+  width: 200px;
+  border-radius: 25px;
+}
+
+/* Estilo para los íconos del usuario y carrito */
+.d-flex .bi {
+  color: #ffffff;
+}
+
+.d-flex .bi:hover {
+  color: #adb5bd;
+}
+
+/* ===================== */
+/* Estilos para la Visualización de Productos */
+/* ===================== */
+
+/* Estilos para los productos en la vista de detalles o show.html.erb */
+.product-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0; /* Extra padding para una sensación espaciosa */
+  background-color: #f8f8f8; /* Color de fondo suave */
+}
+
+.product-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center; /* Centra los elementos horizontalmente */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-image img {
+  max-width: 100%;
+  width: 350px; /* Ancho fijo para uniformidad */
+  height: auto;
+  border-radius: 8px; /* Bordes redondeados para un aspecto suave */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidad */
+  transition: transform 0.3s ease; /* Efecto de hover para interacción */
+}
+
+.product-image img:hover {
+  transform: scale(1.05); /* Efecto de zoom suave en hover */
+}
+
+.product-info {
+  max-width: 400px;
+  text-align: left;
+  font-family: "Helvetica Neue", sans-serif;
+  color: #333; /* Gris oscuro para el texto, para evitar el negro intenso */
+}
+
+.product-info h1 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.product-info p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  color: #666; /* Gris más claro para las descripciones */
+}
+
+.product-info .price {
+  font-size: 28px;
+  font-weight: 700;
+  color: #e60000; /* Rojo para resaltar el precio */
+}
+
+.product-info .add-to-cart {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background-color: #000;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product-info .add-to-cart:hover {
+  background-color: #333;
+}
+
+/* ===================== */
+/* Diseño Adaptable para Móviles */
+/* ===================== */
+@media (max-width: 768px) {
+  .product-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-image img {
+    width: 80%; /* Escala la imagen en pantallas pequeñas */
+    margin-bottom: 20px;
+  }
+
+  .product-info {
+    text-align: center;
+  }
+}
+
+/* ===================== */
+/* Estilo para el badge (contador de productos en el carrito) */
+/* ===================== */
+.badge {
+  font-size: 12px;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50%;
+}
+
+/* Fondo del menú desplegable */
+/* Cambiar el color de fondo del dropdown */
+.dropdown-menu {
+  background-color: #273b30; /* Color del fondo */
+  border-color: #273b30; /* Sin borde visible */
+}
+
+/* Cambiar el color del texto en el dropdown */
+.dropdown-item {
+  color: white; /* Color del texto */
+}
+
+/* Cambiar el color del texto cuando se pasa el ratón */
+.dropdown-item:hover {
+  background-color: #1f2a24; /* Fondo al pasar el ratón */
+  color: white; /* Asegurarse de que el texto sea blanco al hacer hover */
+}
+
+/* Estilo para las categorías principales */
+.parent-category {
+  font-weight: bold; /* Texto en negrita para categorías principales */
+  background-color: #273b30; /* Color de fondo similar al de la navbar */
+  color: white; /* Color del texto en blanco */
+  padding: 10px; /* Añadir espacio alrededor del texto para mayor visibilidad */
+}
+
+/* Estilo para las subcategorías */
+.subcategory {
+  font-size: 0.85rem; /* Texto más pequeño para subcategorías */
+  color: #f1f1f1; /* Color blanco más brillante para subcategorías */
+  padding-left: 40px; /* Aumentar más la indentación para subcategorías */
+  background-color: #1e2a26; /* Fondo oscuro para las subcategorías */
+}
+
+/* Cambiar el fondo cuando se pasa el ratón sobre las categorías */
+.parent-category:hover,
+.subcategory:hover {
+  background-color: #1f2a24; /* Fondo ligeramente más oscuro al pasar el ratón */
+  color: #fff; /* Asegurarse de que el texto sea blanco */
+}
+
+/* ===================== */
+/* Estilo para la tabla carrito */
+/* ===================== */
+/* Estilo para la tabla */
+/* Estilos específicos para la tabla del carrito */
+body #cart-table {
+  width: 80% !important;
+  max-width: 1000px !important;
+  margin: 30px auto !important;
+  border-collapse: collapse !important;
+  background-color: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+body #cart-table thead {
+  background-color: #007bff !important;
+  color: #fff !important;
+}
+
+body #cart-table tbody {
+  background-color: #fff !important;
+}
+
+body #cart-table tbody td {
+  padding: 12px 20px !important;
+  font-size: 14px !important;
+}
+
+body #cart-table tbody tr:hover {
+  background-color: #f4f4f9 !important;
+}
+
+body #cart-table tbody td:last-child {
+  text-align: center !important;
+}
+
+body #cart-table tbody td a {
+  color: #007bff !important;
+}
+
+body #cart-table .btn-primary {
+  background-color: #007bff !important;
+}
+
+body #cart-table .btn-danger {
+  background-color: #e74c3c !important;
+}
+
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.badge.bg-warning {
+  color: #212529;
+}
+
+/* app/assets/stylesheets/application.css */
+.about-section h1 {
+  color: #343a40;
+  font-weight: bold;
+}
+
+.about-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}

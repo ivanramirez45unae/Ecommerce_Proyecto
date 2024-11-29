@@ -1,0 +1,58 @@
+<div class="product-details">
+  <h1>Editar Producto: <%= @product.name %></h1>
+  
+  <% if flash[:error].present? %>
+    <div class="alert alert-danger">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
+  <div class="product-container">
+    <div class="product-image">
+      <%= image_tag "products/#{@product.image_url}" if @product.image_url.present? %>
+      <div class="form-group">
+        <%= label_tag :image_url, "Nueva imagen" %>
+        <%= text_field_tag :image_url, @product.image_url, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="product-info">
+      <%= form_for @product do |f| %>
+        <div class="form-group">
+          <%= f.label :name, "Nombre del Producto" %>
+          <%= f.text_field :name, class: "form-control" %>
+          <% if @product.errors[:name].any? %>
+            <div class="error-message">
+              <%= @product.errors[:name].join(", ") %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :description, "Descripción" %>
+          <%= f.text_area :description, class: "form-control" %>
+          <% if @product.errors[:description].any? %>
+            <div class="error-message">
+              <%= @product.errors[:description].join(", ") %>
+            </div>
+          <% end %>
+        </div>
+
+<div class="form-group">
+  <%= f.label :price, "Precio" %>
+  <%= f.text_field :price, class: "form-control" %> <!-- Cambié a text_field -->
+  <% if @product.errors[:price].any? %>
+    <div class="error-message">
+      <%= @product.errors[:price].join(", ") %>
+    </div>
+  <% end %>
+</div>
+
+
+        <div class="form-group">
+          <%= f.submit "Aceptar Cambios", class: "btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

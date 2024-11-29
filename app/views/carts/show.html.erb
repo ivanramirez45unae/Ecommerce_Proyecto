@@ -1,0 +1,38 @@
+<h1>Tu Carrito (<%= @cart.sum { |item| item["quantity"] } %> artículos)</h1>
+
+<table class="table table-bordered mt-4">
+  <thead class="table-dark">
+    <tr>
+      <th>Artículo</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Total</th>
+      <th>Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart.each do |item| %>
+      <% product = Product.find(item["product_id"]) %> <!-- Busca el producto en la base de datos -->
+      <tr>
+        <td><%= product.name %></td> <!-- Nombre del producto -->
+        <td><%= number_with_delimiter(product.price.to_i, delimiter: ".", separator: "") %> Gs.</td> <!-- Precio del producto -->
+        <td><%= item["quantity"] %></td> <!-- Cantidad -->
+        <td><%= number_with_delimiter(product.price.to_i * item["quantity"], delimiter: ".", separator: "") %> Gs.</td> <!-- Total (precio * cantidad) -->
+        <td>
+          <%= button_to "Quitar", remove_from_cart_cart_path(product_id: product.id), 
+                        method: :delete, 
+                        data: { confirm: "¿Estás seguro de que quieres eliminar este producto del carrito?" }, 
+                        class: "btn btn-danger btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p class="text-end fw-bold mt-3">
+  Total General: <%= number_with_delimiter(@cart.sum { |item| Product.find(item["product_id"]).price.to_i * item["quantity"] }, delimiter: ".", separator: "") %> Gs.
+</p>
+
+<div class="text-end mt-3">
+  <%= link_to "Checkout", checkout_cart_path, class: "btn btn-primary" %>
+</div>

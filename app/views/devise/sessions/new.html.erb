@@ -1,0 +1,46 @@
+<%= stylesheet_link_tag 'login', media: 'all' %>
+
+<% if notice %>
+  <div class="alert alert-info">
+    <%= notice %>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div class="alert alert-warning">
+    <%= alert %>
+  </div>
+<% end %>
+
+<body>
+  <!-- Contenedor principal -->
+  <div class="login-form">
+
+    <h1 class="login-title">Iniciar Sesión</h1>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email, "Correo Electrónico" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, "Contraseña" %><br />
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <div class="checkbox-container">
+            <%= f.label :remember_me, "Recuérdame", class: 'remember-label' %>
+            <%= f.check_box :remember_me, class: 'remember-checkbox' %>
+          </div>
+        </div>
+      <% end %>
+      <div class="actions">
+        <%= f.submit "Iniciar Sesión" %>
+      </div>
+      <%= render "devise/shared/links" %>
+    <% end %>
+  </div>
+</body>
+

@@ -1,0 +1,74 @@
+<div class="checkout-container">
+<!-- Resumen del Pedido -->
+<div class="order-summary">
+  <h2>Resumen del Pedido</h2>
+  <ul>
+    <% @cart.each do |item| %>
+      <% product = Product.find(item["product_id"]) %> <!-- Obtén el producto por ID -->
+      <li>
+        <%= item["quantity"] %> x <%= product.name %> --------------------- 
+        <%= number_with_delimiter((product.price * item["quantity"]).to_i, delimiter: ".", separator: "") %> Gs.
+      </li>
+    <% end %>
+  </ul>
+  <p>
+    <strong>
+      Total = <%= number_with_delimiter(@cart.sum { |item| Product.find(item["product_id"]).price * item["quantity"] }.to_i, delimiter: ".", separator: "") %> Gs.
+    </strong>
+  </p>
+</div>
+
+<%= form_with url: complete_cart_cart_path, method: :post, local: true do |form| %>
+  <!-- Información de Envío -->
+  <div class="shipping-info">
+    <h2>Información de Envío</h2>
+    
+    <%= form.label :nombre, "Nombre" %>
+    <%= form.text_field :nombre, class: "form-control", required: true, minlength: 2, maxlength: 50, placeholder: "Ingresa tu nombre" %>
+
+    <%= form.label :apellido, "Apellido" %>
+    <%= form.text_field :apellido, class: "form-control", required: true, minlength: 2, maxlength: 50, placeholder: "Ingresa tu apellido" %>
+
+    <%= form.label :email, "Email" %>
+    <%= form.email_field :email, class: "form-control", required: true, placeholder: "Ingresa tu correo electrónico" %>
+
+    <%= form.label :telefono, "Teléfono" %>
+    <%= form.text_field :telefono, class: "form-control", required: true, pattern: "^[0-9]{9,15}$", placeholder: "Ej: 0987654321" %>
+
+    <%= form.label :pais, "País" %>
+    <%= form.text_field :pais, class: "form-control", required: true, minlength: 2, maxlength: 50, placeholder: "Ingresa tu país" %>
+
+    <%= form.label :ciudad, "Ciudad" %>
+    <%= form.text_field :ciudad, class: "form-control", required: true, minlength: 2, maxlength: 50, placeholder: "Ingresa tu ciudad" %>
+
+    <%= form.label :departamento, "Departamento" %>
+    <%= form.text_field :departamento, class: "form-control", required: true, minlength: 2, maxlength: 50, placeholder: "Ingresa tu departamento" %>
+
+    <%= form.label :calle, "Calle" %>
+    <%= form.text_field :calle, class: "form-control", required: true, minlength: 2, maxlength: 100, placeholder: "Ingresa tu calle" %>
+  </div>
+
+  <!-- Información de Pago -->
+  <div class="payment-info">
+    <h2>Pago</h2>
+    
+    <%= form.label :numero_tarjeta, "Nº tarjeta" %>
+    <%= form.text_field :numero_tarjeta, class: "form-control", required: true %>
+
+    <%= form.label :titular, "Nombre del titular" %>
+    <%= form.text_field :titular, class: "form-control", required: true %>
+
+    <%= form.label :vencimiento, "Vencimiento" %>
+    <%= form.text_field :vencimiento, class: "form-control", required: true %>
+
+    <%= form.label :cvv, "CVV" %>
+    <%= form.text_field :cvv, class: "form-control", required: true %>
+    <!-- Botón para completar la orden -->
+    <div class="form-group">
+      <%= form.submit "Completar Orden", class: "btn btn-success" %>
+    </div>
+  </div>
+<% end %>
+
+
+

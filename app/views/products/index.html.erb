@@ -1,0 +1,28 @@
+<div class="container-fluid mt-4">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+<% if @products.any? %>
+  <% @products.each do |product| %>
+    <div class="col-md-3">
+      <div class="card h-100 text-center">
+        <div class="card-body">
+          <%= link_to product_path(product) do %>
+            <%= image_tag "products/#{product.image_url}", class: "card-img-top" if product.image_url.present? %>
+            <h5 class="card-title"><%= product.name %></h5>
+          <% end %>
+          <p class="card-text">$<%= product.price %></p>
+
+          <% if product.agotado? %>
+            <p class="text-danger"><strong>Agotado</strong></p>
+          <% else %>
+            <p class="text-success"><strong>En stock</strong></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p>No hay productos que coincidan con la búsqueda.</p>
+<% end %>
+
+  </div>
+</div>

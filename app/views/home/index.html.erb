@@ -1,0 +1,41 @@
+<div class="container-fluid mt-4">
+  <% if current_user&.admin? %>
+    <%= link_to "Nuevo Producto", new_product_path, class: "btn btn-success mb-3" %>
+  <% end %>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% if @products.any? %>
+    <% @products.each do |product| %>
+      <div class="col-md-3">
+        <div class="card h-100 text-center">
+          <div class="card-body">
+            <%= link_to product_path(product) do %>
+              <%= image_tag "products/#{product.image_url}", class: "card-img-top" if product.image_url.present? %>
+              <h5 class="card-title"><%= product.name %></h5>
+            <% end %>
+            <p class="card-text"><%= number_with_delimiter(product.price.to_i, delimiter: ".", separator: "") %> Gs.</p>
+            
+            <% if product.agotado? %>
+              <p class="text-danger"><strong>Agotado</strong></p>
+            <% else %>
+              <p class="text-success"><strong>En stock</strong></p>
+            <% end %>
+              <% if current_user&.admin? %>
+                <div class="mt-2 d-inline-flex gap-2">
+                  <%= link_to "Editar", edit_product_path(product), class: "btn btn-success btn-sm" %>
+              <%= button_to "Eliminar", product_path(product), 
+                            method: :delete, 
+                            data: { confirm: "¿Estás seguro de que quieres eliminar este producto?" }, 
+                            class: "btn btn-danger btn-sm" %>
+
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No hay productos que coincidan con la búsqueda.</p>
+    <% end %>
+  </div>
+</div>
+

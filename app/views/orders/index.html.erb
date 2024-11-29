@@ -1,0 +1,89 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Gestión de Órdenes</h1>
+  
+  <table class="table table-striped table-hover align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>#ID</th>
+        <th>Cliente</th>
+        <th>Total</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= "#{order.nombre} #{order.apellido}" %></td>
+          <td><p class="card-text"><%= number_with_delimiter(order.total.to_i, delimiter: ".", separator: "") %> Gs.</p></td>
+          <td><%= order.created_at.strftime('%d/%m/%Y') %></td>
+          <td>
+            <span class="badge <%= order.status ? 'bg-success' : 'bg-warning' %>">
+                <%= order.status ? 'Entregado' : 'Pendiente' %>
+            </span>
+          </td>
+          <td>
+            <button 
+              class="btn btn-primary btn-sm" 
+              data-bs-toggle="modal" 
+              data-bs-target="#orderDetails<%= order.id %>"
+            >
+              Ver Detalles
+            </button>
+            <%= link_to 'Cambiar Estado', change_status_order_path(order), 
+            method: :patch, 
+            class: 'btn btn-outline-success btn-sm', 
+            data: { confirm: '¿Estás seguro de cambiar el estado?' } %>
+
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- Modales -->
+  <% @orders.each do |order| %>
+    <div class="modal fade" id="orderDetails<%= order.id %>" tabindex="-1" aria-labelledby="orderDetailsLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="orderDetailsLabel">Detalles de la Orden #<%= order.id %></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h6>Información del Cliente</h6>
+            <p>
+              <strong>Nombre:</strong> <%= order.nombre %> <%= order.apellido %><br>
+              <strong>Email:</strong> <%= order.email %><br>
+              <strong>Teléfono:</strong> <%= order.telefono %><br>
+              <strong>Dirección:</strong> <%= "#{order.calle}, #{order.ciudad}, #{order.departamento}, #{order.pais}" %>
+            </p>
+
+            <h6>Productos</h6>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% order.order_products.each do |op| %>
+                  <tr>
+                    <td><%= op.product.name %></td>
+                    <td><%= op.quantity %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+            <h6>Total</h6>
+            <p class="card-text"><%= number_with_delimiter(order.total.to_i, delimiter: ".", separator: "") %> Gs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

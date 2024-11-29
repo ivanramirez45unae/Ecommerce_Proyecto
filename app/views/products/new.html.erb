@@ -1,0 +1,32 @@
+<h1>Crear Producto</h1>
+
+<%= form_with model: @product, local: true do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, "Nombre del Producto" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, "Descripción" %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :price, "Precio" %>
+    <%= form.number_field :price, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :category_id, "Categoría" %>
+    <%= form.select :category_id, Category.all.collect { |c| [c.name, c.id] }, {}, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :image_url, "URL de la Imagen" %>
+    <%= form.text_field :image_url, class: "form-control" %>
+  </div>
+
+  <%= form.submit "Crear Producto", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to "Volver", root_path, class: "btn btn-secondary mt-3" %>

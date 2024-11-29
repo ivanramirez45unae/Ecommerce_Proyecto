@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f7fb;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 35px;
+  font-weight: 600;
+  color: #333;
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.field input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.field input:focus {
+  border-color: #6200ea;
+  outline: none;
+  box-shadow: 0 0 6px rgba(98, 0, 234, 0.4);
+}
+
+.actions {
+  margin-top: 25px;
+}
+
+.actions input[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.actions input[type="submit"]:hover {
+  background-color: #4500a3;
+}
+
+.actions input[type="submit"]:active {
+  background-color: #37006a;
+}
+
+.field input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.field label {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.devise-links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.devise-links a {
+  color: #6200ea;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.devise-links a:hover {
+  text-decoration: underline;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between checkbox and label */
+  width: auto; /* Adjust width to fit content */
+}
+
+.remember-checkbox {
+  margin-right: 10px; /* Espacio entre el checkbox y la etiqueta */
+  width: auto;
+}
+
+.remember-label {
+  font-size: 1rem;
+  color: #333;
+}
+
+.texto-pequeño {
+  font-size: 0.85em; /* Tamaño reducido del texto */
+  color: #666; /* Color opcional para diferenciar */
+}

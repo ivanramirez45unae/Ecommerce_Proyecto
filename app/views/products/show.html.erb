@@ -1,0 +1,50 @@
+<div class="product-details">
+  <h1><%= @product.name %></h1>
+  <div class="product-container">
+    <div class="product-image">
+      <!-- Muestra la imagen del producto -->
+      <%= image_tag "products/#{@product.image_url}" if @product.image_url.present? %>
+    </div>
+
+    <div class="product-info">
+      <p><%= @product.description %></p>
+      <p><strong><%= number_with_delimiter(@product.price.to_i, delimiter: ".", separator: "") %> Gs.</strong></p>
+      
+      <!-- Mostrar mensaje de "Agotado" si no hay stock -->
+      <% if @product.agotado? %>
+        <p class="text-danger"><strong>Producto agotado</strong></p>
+      <% else %>
+        <!-- Seleccionar cantidad -->
+        <%= form_with url: add_to_cart_cart_path(product_id: @product.id), method: :post, local: true do |form| %>
+          <div class="form-group">
+            <label for="quantity"></label>
+            <%= form.number_field :quantity, in: 1..@product.stock, step: 1, value: 1, class: 'form-control' %>
+          </div>
+          <!-- Botón para agregar al carrito -->
+          <%= button_to 'Agregar al Carrito', add_to_cart_cart_path(product_id: @product.id), method: :post, class: 'btn btn-success' %>
+        <% end %>
+      <% end %>
+      
+      <!-- Mostrar el botón dependiendo si el producto está en favoritos -->
+      <% if current_user.favorite_products.include?(@product) %>
+        <!-- Si está en favoritos, mostrar el botón para eliminarlo -->
+        <%= button_to "Eliminar de favoritos", unfavorite_product_path(@product), method: :delete, class: "btn btn-danger" %>
+      <% else %>
+        <!-- Si no está en favoritos, mostrar el botón para agregarlo -->
+        <%= button_to "Favorito ❤️", favorite_product_path(@product), method: :post, class: "btn btn-secondary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+      <!-- Mostrar el mensaje de flash si está presente -->
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="alert alert-warning">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+  </div>
+</div>
